@@ -9,6 +9,7 @@ import java.util.List;
 @Service
 public class StateService {
     private RepositoryState repositoryState;
+
     public StateService(RepositoryState repositoryState) {
         this.repositoryState = repositoryState;
     }

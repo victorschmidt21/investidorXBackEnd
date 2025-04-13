@@ -1,22 +1,31 @@
 package com.java.Invista.service;
 
+import com.java.Invista.dto.request.CityRequest;
 import com.java.Invista.entity.CityEntity;
 import com.java.Invista.repository.RepositoryCity;
+import com.java.Invista.repository.RepositoryState;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Service
 public class CityService {
-    private final RepositoryCity repositoryCity;
-    public CityService(RepositoryCity repositoryCity) {
-        this.repositoryCity = repositoryCity;
-    }
+    @Autowired
+    private RepositoryCity repositoryCity;
+    @Autowired
+    private RepositoryState repositoryState;
 
-    public String createAll(List<CityEntity> citys){
-         repositoryCity.saveAll(citys);
-         return "Cidades cadastrada com sucesso!";
+
+    public void create(CityRequest request){
+         CityEntity city = request.toModel(repositoryState);
+         repositoryCity.save(city);
+    }
+    public void createAll(List<CityRequest> requests){
+        for(CityRequest request : requests){
+            CityEntity city = request.toModel(repositoryState);
+            repositoryCity.save(city);
+        }
     }
 
 }

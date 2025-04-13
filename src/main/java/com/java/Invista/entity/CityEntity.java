@@ -8,23 +8,27 @@ import jakarta.persistence.*;
 public class CityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_city;
+    private Long id;
     private String nome;
-    private Long id_state;
-    public CityEntity() {
 
-    }
-    public CityEntity(String nome, Long id_state) {
+    @ManyToOne
+    @JoinColumn(name = "state_id", nullable = false)
+    private StateEntity state;
+
+    public CityEntity(String nome, StateEntity state) {
         this.nome = nome;
-        this.id_state = id_state;
+        this.state = state;
     }
 
-    public Long getId_city() {
-        return id_city;
+    public CityEntity() {
     }
 
-    public void setId_city(Long id_city) {
-        this.id_city = id_city;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -35,11 +39,11 @@ public class CityEntity {
         this.nome = nome;
     }
 
-    public Long getId_state() {
-        return id_state;
+    public StateEntity getState() {
+        return state;
     }
 
-    public void setId_state(Long id_state) {
-        this.id_state = id_state;
+    public void setState(StateEntity state) {
+        this.state = state;
     }
 }
