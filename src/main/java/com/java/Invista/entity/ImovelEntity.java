@@ -16,29 +16,16 @@ public class ImovelEntity {
     private String street;
     private Number number;
     private String neighboard;
-    private Long id_cidade;
-    private Long id_state;
-    private Long id_user;
-    private Long id_owner;
-    private Long assessment;
-    private Date date_Value;
     private Number valueRegistration;
+    private Date date_Value;
+    @ManyToOne
+    CityEntity city;
+    @ManyToOne
+    UserEntity user;
+    @ManyToOne
+    OwnerEntity owner;
 
-    public Date getDate_Value() {
-        return date_Value;
-    }
-
-    public void setDate_Value(Date date_Value) {
-        this.date_Value = date_Value;
-    }
-
-    public Number getValueRegistration() {
-        return valueRegistration;
-    }
-
-    public void setValueRegistration(Number valueRegistration) {
-        this.valueRegistration = valueRegistration;
-    }
+    public ImovelEntity() {}
 
     public Long getId_imovel() {
         return id_imovel;
@@ -80,44 +67,56 @@ public class ImovelEntity {
         this.neighboard = neighboard;
     }
 
-    public Long getId_state() {
-        return id_state;
+    public Number getValueRegistration() {
+        return valueRegistration;
     }
 
-    public void setId_state(Long id_state) {
-        this.id_state = id_state;
+    public void setValueRegistration(Number valueRegistration) {
+        this.valueRegistration = valueRegistration;
     }
 
-    public Long getId_cidade() {
-        return id_cidade;
+    public Date getDate_Value() {
+        return date_Value;
     }
 
-    public void setId_cidade(Long id_cidade) {
-        this.id_cidade = id_cidade;
+    public void setDate_Value(Date date_Value) {
+        this.date_Value = date_Value;
     }
 
-    public Long getId_user() {
-        return id_user;
+    public CityEntity getCity() {
+        return city;
     }
 
-    public void setId_user(Long id_user) {
-        this.id_user = id_user;
+    public void setCity(CityEntity city) {
+        this.city = city;
     }
 
-    public Long getId_owner() {
-        return id_owner;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setId_owner(Long id_owner) {
-        this.id_owner = id_owner;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
-    public Long getAssessment() {
-        return assessment;
+    public OwnerEntity getOwner() {
+        return owner;
     }
 
-    public void setAssessment(Long assessment) {
-        this.assessment = assessment;
+    public void setOwner(OwnerEntity owner) {
+        this.owner = owner;
+    }
+
+    public ImovelEntity(String nome_imovel, String street, Number number, String neighboard, Number valueRegistration, Date date_Value, CityEntity city, UserEntity user, OwnerEntity owner) {
+        this.nome_imovel = nome_imovel;
+        this.street = street;
+        this.number = number;
+        this.neighboard = neighboard;
+        this.valueRegistration = valueRegistration;
+        this.date_Value = date_Value;
+        this.city = city;
+        this.user = user;
+        this.owner = owner;
     }
 }
 

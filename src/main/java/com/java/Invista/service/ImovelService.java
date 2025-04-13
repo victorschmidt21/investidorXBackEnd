@@ -33,17 +33,14 @@ public class ImovelService {
         if (imovel.getNome_imovel() == null) {
             camposFaltantes.add("nome_imovel");
         }
-        if (imovel.getId_cidade() == null) {
-            camposFaltantes.add("id_cidade");
+        if(imovel.getOwner() == null) {
+            camposFaltantes.add("owner");
         }
-        if (imovel.getId_state() == null) {
-            camposFaltantes.add("id_state");
+        if (imovel.getCity() == null) {
+            camposFaltantes.add("city");
         }
-        if (imovel.getAssessment() == null) {
-            camposFaltantes.add("assessment");
-        }
-        if (imovel.getId_user() == null) {
-            camposFaltantes.add("id_user");
+        if (imovel.getUser() == null) {
+            camposFaltantes.add("user");
         }
 
         if (!camposFaltantes.isEmpty()) {
@@ -51,9 +48,6 @@ public class ImovelService {
             throw new RuntimeException(mensagem);
         }
 
-        if (imovel.getAssessment() < 0) {
-            throw new IllegalArgumentException("O valor de assessment não pode ser negativo");
-        }
     }
 
     public List<ImovelEntity> list() {

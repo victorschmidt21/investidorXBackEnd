@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "valuation")
-public class Valuation {
+public class ValuationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,10 +18,10 @@ public class Valuation {
     @ManyToOne
     ImovelEntity imovel;
 
-    public Valuation() {
+    public ValuationEntity() {
     }
 
-    public Valuation(String nameResponsible, String description, Date date, String rotaImage, ImovelEntity imovel) {
+    public ValuationEntity(String nameResponsible, String description, Date date, String rotaImage, ImovelEntity imovel) {
         this.nameResponsible = nameResponsible;
         this.description = description;
         this.date = date;
