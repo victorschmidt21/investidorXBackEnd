@@ -1,9 +1,11 @@
 package com.java.Invista.controller;
 
+import com.java.Invista.dto.request.ImovelRequest;
 import com.java.Invista.entity.StateEntity;
 import com.java.Invista.service.StateService;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +19,9 @@ public class StateController {
     }
 
     @PostMapping
-    String create(@RequestBody StateEntity state) {
-        return stateService.create(state);
+    ResponseEntity<String> create(@RequestBody StateEntity state) {
+        stateService.create(state);
+        return ResponseEntity.ok("Imovel cadastrado com sucesso!");
     }
     @PostMapping("/all")
     String creates(@RequestBody List<StateEntity> states) {

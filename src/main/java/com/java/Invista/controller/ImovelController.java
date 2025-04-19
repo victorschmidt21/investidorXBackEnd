@@ -1,5 +1,6 @@
 package com.java.Invista.controller;
 
+import com.java.Invista.dto.request.ImovelRequest;
 import com.java.Invista.entity.ImovelEntity;
 import com.java.Invista.service.ImovelService;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class ImovelController {
         this.imovelService = imovelService;
     }
     @PostMapping
-    String create(@RequestBody ImovelEntity imovel) {
+    String create(@RequestBody ImovelRequest imovel) {
         return imovelService.create(imovel);
     }
     @PutMapping("{id}")
