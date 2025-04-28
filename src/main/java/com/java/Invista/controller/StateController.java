@@ -1,10 +1,7 @@
 package com.java.Invista.controller;
 
-import com.java.Invista.dto.request.ImovelRequest;
 import com.java.Invista.entity.StateEntity;
 import com.java.Invista.service.StateService;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

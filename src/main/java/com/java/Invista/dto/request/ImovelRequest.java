@@ -1,84 +1,74 @@
 package com.java.Invista.dto.request;
-
-import com.java.Invista.entity.CityEntity;
-import com.java.Invista.entity.ImovelEntity;
-import com.java.Invista.entity.OwnerEntity;
-import com.java.Invista.entity.UserEntity;
+import com.java.Invista.entity.*;
+import com.java.Invista.repository.RepositoryAddress;
 import com.java.Invista.repository.RepositoryCity;
 import com.java.Invista.repository.RepositoryOwner;
 import com.java.Invista.repository.RepositoryUser;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 public class ImovelRequest {
     private String nomeImovel;
     private String street;
     private Integer number;
-    private String neighboard;
+    private String neighborhood;
     private Double valueRegistration;
-    private Date dateValue;
+    private LocalDate dateValue;
     private Long cityId;
-    private Long userId;
+    private String userId;
     private Long ownerId;
 
-    RepositoryCity repositoryCity;
-    RepositoryUser repositoryUser;
-    RepositoryOwner repositoryOwner;
 
-    public ImovelRequest(RepositoryUser repositoryUser, RepositoryCity repositoryCity, RepositoryOwner repositoryOwner) {
-        this.repositoryUser = repositoryUser;
-        this.repositoryCity = repositoryCity;
-        this.repositoryOwner = repositoryOwner;
-    }
 
-    public ImovelRequest(String nomeImovel, String street, Integer number, String neighboard, Double valueRegistration, Date dateValue, Long cityId, Long userId, Long ownerId) {
+    public ImovelRequest(String nomeImovel, String street, Integer number, String neighborhood, Double valueRegistration, Long cityId, String userId, Long ownerId) {
         this.nomeImovel = nomeImovel;
         this.street = street;
         this.number = number;
-        this.neighboard = neighboard;
+        this.neighborhood = neighborhood;
         this.valueRegistration = valueRegistration;
-        this.dateValue = dateValue;
+        if(valueRegistration != null) {
+            this.dateValue = LocalDate.now();
+
+        }
         this.cityId = cityId;
         this.userId = userId;
         this.ownerId = ownerId;
-        validarCamposObrigatorios();
 
     }
 
-    private void validarCamposObrigatorios() {
-        List<String> camposFaltantes = new ArrayList<>();
 
-        if (this.nomeImovel == null) {
-            camposFaltantes.add("nome_imovel");
-        }
-        if(this.ownerId == null) {
-            camposFaltantes.add("owner");
-        }
-        if (this.cityId == null) {
-            camposFaltantes.add("city");
-        }
-        if (this.userId == null) {
-            camposFaltantes.add("user");
-        }
-
-        if (!camposFaltantes.isEmpty()) {
-            String mensagem = "Faltam dados para o cadastro do imóvel: " + String.join(", ", camposFaltantes);
-            throw new RuntimeException(mensagem);
-        }
-
+    public ImovelEntity toModel(RepositoryUser repositoryUser, RepositoryCity repositoryCity, RepositoryOwner repositoryOwner, RepositoryAddress repositoryAddress){
+        UserEntity user = repositoryUser.findById(userId).orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
+        OwnerEntity owner = repositoryOwner.findById(ownerId).orElseThrow(() -> new RuntimeException("Proprietário não encontrado!"));
+        CityEntity city = repositoryCity.findById(cityId).orElseThrow(() -> new RuntimeException("Cidade não encontrada!"));
+        AddressEntity address = new AddressEntity(street,number, neighborhood, city);
+        repositoryAddress.save(address);
+        return new ImovelEntity(nomeImovel, valueRegistration, dateValue, address ,user, owner);
     }
 
-    public ImovelEntity toModel(){
-        UserEntity user = repositoryUser.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        OwnerEntity owner = repositoryOwner.findById(ownerId)
-                .orElseThrow(() -> new RuntimeException("Owner not found"));
-        CityEntity city = repositoryCity.findById(cityId)
-                .orElseThrow(() -> new RuntimeException("City not found"));
-        return new ImovelEntity(nomeImovel, street, number, neighboard, valueRegistration, dateValue, city, user, owner);
+    public String getNomeImovel() {
+        return nomeImovel;
+    }
+
+    public String getStreet() {
+        return street;
     }
 
 
+    public Integer getNumber() {
+        return number;
+    }
+
+
+    public Double getValueRegistration() {
+        return valueRegistration;
+    }
+
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
 }

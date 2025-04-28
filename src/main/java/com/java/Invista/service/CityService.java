@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CityService {
@@ -16,6 +17,9 @@ public class CityService {
     @Autowired
     private RepositoryState repositoryState;
 
+    public Optional<CityEntity> getById(Long id) {
+        return repositoryCity.findById(id);
+    }
 
     public void create(CityRequest request){
          CityEntity city = request.toModel(repositoryState);

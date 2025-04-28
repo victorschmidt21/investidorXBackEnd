@@ -14,6 +14,7 @@ public class ValuationEntity {
     private Date date;
     private String description;
     private String rotaImage;
+    private double value;
 
     @ManyToOne
     ImovelEntity imovel;
@@ -21,12 +22,13 @@ public class ValuationEntity {
     public ValuationEntity() {
     }
 
-    public ValuationEntity(String nameResponsible, String description, Date date, String rotaImage, ImovelEntity imovel) {
+    public ValuationEntity(String nameResponsible, String description, Date date, String rotaImage, ImovelEntity imovel, double value) {
         this.nameResponsible = nameResponsible;
         this.description = description;
         this.date = date;
         this.rotaImage = rotaImage;
         this.imovel = imovel;
+        this.value = value;
     }
 
     public String getNameResponsible() {
@@ -75,5 +77,13 @@ public class ValuationEntity {
 
     public void setImovel(ImovelEntity imovel) {
         this.imovel = imovel;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
     }
 }

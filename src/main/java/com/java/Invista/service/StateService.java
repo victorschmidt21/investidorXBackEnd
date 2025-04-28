@@ -1,6 +1,5 @@
 package com.java.Invista.service;
 
-import com.java.Invista.dto.request.ImovelRequest;
 import com.java.Invista.entity.StateEntity;
 import com.java.Invista.repository.RepositoryState;
 import org.springframework.stereotype.Service;

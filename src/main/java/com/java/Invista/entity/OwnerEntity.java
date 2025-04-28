@@ -1,5 +1,4 @@
 package com.java.Invista.entity;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -8,27 +7,27 @@ public class OwnerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String Name;
-    private String cpf;
-    private String cnpj;
-    private Number Phone;
-    private Number number;
-    private String street;
-    private String neighborhood;
+    private String name;
+    private String cpf_cnpj;
+    private Number phone;
+    private String email;
+    private Boolean ativo = true;
 
     @ManyToOne
-    CityEntity city;
+    AddressEntity address;
+
+    @ManyToOne
+    UserEntity user;
+
     public OwnerEntity() {}
 
-    public OwnerEntity(String name, String cpf, String cnpj, Number phone, Number number, String street, String neighborhood, CityEntity city) {
-        Name = name;
-        this.cpf = cpf;
-        this.cnpj = cnpj;
-        Phone = phone;
-        this.number = number;
-        this.street = street;
-        this.neighborhood = neighborhood;
-        this.city = city;
+    public OwnerEntity(String name, String cpf_cnpj, Number phone, String email, AddressEntity address, UserEntity user) {
+        this.name = name;
+        this.cpf_cnpj = cpf_cnpj;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.user = user;
     }
 
     public Long getId() {
@@ -40,66 +39,58 @@ public class OwnerEntity {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getCpf_cnpj() {
+        return cpf_cnpj;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setCpf_cnpj(String cpf_cnpj) {
+        this.cpf_cnpj = cpf_cnpj;
     }
 
     public Number getPhone() {
-        return Phone;
+        return phone;
     }
 
     public void setPhone(Number phone) {
-        Phone = phone;
+        this.phone = phone;
     }
 
-    public Number getNumber() {
-        return number;
+    public AddressEntity getAddress() {
+        return address;
     }
 
-    public void setNumber(Number number) {
-        this.number = number;
+    public void setAddress(AddressEntity address) {
+        this.address = address;
     }
 
-    public String getStreet() {
-        return street;
+    public String getEmail() {
+        return email;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public String getNeighborhood() {
-        return neighborhood;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
+    public Boolean getAtivo() {
+        return ativo;
     }
 
-    public CityEntity getCity() {
-        return city;
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 
-    public void setCity(CityEntity city) {
-        this.city = city;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
