@@ -8,7 +8,9 @@ import com.java.Invista.repository.RepositoryAddress;
 import com.java.Invista.repository.RepositoryCity;
 import com.java.Invista.repository.RepositoryUser;
 
+
 public class OwnerRequest {
+
     private String name;
     private String cpf_cnpj;
     private Number phone;
@@ -19,14 +21,6 @@ public class OwnerRequest {
     private String neighborhood;
     private String userId;
     private Integer cep;
-
-    public Integer getCep() {
-        return cep;
-    }
-
-    public void setCep(Integer cep) {
-        this.cep = cep;
-    }
 
     public OwnerRequest(String name, String cpf_cnpj, Number phone, String email, Long cityid, String street, Integer number, String neighborhood, String userId, Integer cep) {
         this.name = name;
@@ -40,8 +34,6 @@ public class OwnerRequest {
         this.userId = userId;
         this.cep = cep;
     }
-
-
 
     public OwnerEntity toModel(RepositoryAddress repositoryAddress, RepositoryCity repositoryCity, RepositoryUser repositoryUser){
         UserEntity user = repositoryUser.findById(userId).orElseThrow(()-> new RuntimeException("Usuário não encontrado"));
@@ -87,8 +79,8 @@ public class OwnerRequest {
         return cityId;
     }
 
-    public void setCityid(Long cityid) {
-        this.cityId = cityid;
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
     public String getStreet() {
@@ -115,6 +107,14 @@ public class OwnerRequest {
         this.neighborhood = neighborhood;
     }
 
+    public Integer getCep() {
+        return cep;
+    }
+
+    public void setCep(Integer cep) {
+        this.cep = cep;
+    }
+
     public String getUserId() {
         return userId;
     }
@@ -123,7 +123,5 @@ public class OwnerRequest {
         this.userId = userId;
     }
 
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
-    }
+
 }

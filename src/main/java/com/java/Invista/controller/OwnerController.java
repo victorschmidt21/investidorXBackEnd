@@ -1,8 +1,6 @@
 package com.java.Invista.controller;
 
-import com.java.Invista.dto.request.ImovelRequest;
 import com.java.Invista.dto.request.OwnerRequest;
-import com.java.Invista.entity.ImovelEntity;
 import com.java.Invista.entity.OwnerEntity;
 import com.java.Invista.service.OwnerService;
 import org.springframework.web.bind.annotation.*;

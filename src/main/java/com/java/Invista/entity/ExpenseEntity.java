@@ -2,7 +2,7 @@ package com.java.Invista.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "expense")
@@ -13,12 +13,12 @@ public class ExpenseEntity {
         private String title;
         private String description;
         private double value;
-        private Date date;
+        private LocalDate date;
 
         @ManyToOne
         ImovelEntity imovel;
 
-        public ExpenseEntity(String title, String description, double value, Date date, ImovelEntity imovel) {
+        public ExpenseEntity(String title, String description, double value, LocalDate date, ImovelEntity imovel) {
             this.title = title;
             this.description = description;
             this.value = value;
@@ -61,11 +61,11 @@ public class ExpenseEntity {
             this.value = value;
         }
 
-        public Date getDate() {
+        public LocalDate getDate() {
             return date;
         }
 
-        public void setDate(Date date) {
+        public void setDate(LocalDate date) {
             this.date = date;
         }
 

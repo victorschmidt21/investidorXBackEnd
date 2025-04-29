@@ -2,7 +2,6 @@ package com.java.Invista.controller;
 
 import com.java.Invista.dto.request.ImovelRequest;
 import com.java.Invista.entity.ImovelEntity;
-import com.java.Invista.entity.UserEntity;
 import com.java.Invista.repository.RepositoryImovel;
 import com.java.Invista.service.ImovelService;
 import org.springframework.beans.factory.annotation.Autowired;
