@@ -18,8 +18,17 @@ public class OwnerRequest {
     private Integer number;
     private String neighborhood;
     private String userId;
+    private Integer cep;
 
-    public OwnerRequest(String name, String cpf_cnpj, Number phone, String email, Long cityid, String street, Integer number, String neighborhood) {
+    public Integer getCep() {
+        return cep;
+    }
+
+    public void setCep(Integer cep) {
+        this.cep = cep;
+    }
+
+    public OwnerRequest(String name, String cpf_cnpj, Number phone, String email, Long cityid, String street, Integer number, String neighborhood, String userId, Integer cep) {
         this.name = name;
         this.cpf_cnpj = cpf_cnpj;
         this.phone = phone;
@@ -28,6 +37,8 @@ public class OwnerRequest {
         this.street = street;
         this.number = number;
         this.neighborhood = neighborhood;
+        this.userId = userId;
+        this.cep = cep;
     }
 
 
@@ -35,7 +46,7 @@ public class OwnerRequest {
     public OwnerEntity toModel(RepositoryAddress repositoryAddress, RepositoryCity repositoryCity, RepositoryUser repositoryUser){
         UserEntity user = repositoryUser.findById(userId).orElseThrow(()-> new RuntimeException("Usuário não encontrado"));
         CityEntity city = repositoryCity.findById(cityId).orElseThrow(() -> new RuntimeException("Cidade não encontrada!"));
-        AddressEntity address = new AddressEntity(street, number, neighborhood, city);
+        AddressEntity address = new AddressEntity(street, number, neighborhood, city, cep);
         repositoryAddress.save(address);
         return new OwnerEntity(name, cpf_cnpj, phone, email, address, user);
     }

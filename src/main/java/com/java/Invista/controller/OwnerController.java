@@ -32,6 +32,11 @@ public class OwnerController {
         return ownerService.update(id, ownerRequest);
     }
 
+    @GetMapping("/{id}")
+    List<OwnerEntity> getOwner(@PathVariable("id") String id) {
+        return ownerService.getByUserId(id);
+    }
+
     @DeleteMapping("/{id}")
     String delete(@PathVariable("id") Long id) {
         return ownerService.delete(id);

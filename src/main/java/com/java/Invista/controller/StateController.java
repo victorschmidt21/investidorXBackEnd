@@ -24,7 +24,7 @@ public class StateController {
     String creates(@RequestBody List<StateEntity> states) {
         return  stateService.creates(states);
     }
-    @GetMapping("/all")
+    @GetMapping
     List<StateEntity> getAll() {
         return stateService.getAll();
     }

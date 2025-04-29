@@ -16,22 +16,24 @@ public class ImovelRequest {
     private Long cityId;
     private String userId;
     private Long ownerId;
+    private Integer cep;
 
 
+    public Integer getCep() {
+        return cep;
+    }
 
-    public ImovelRequest(String nomeImovel, String street, Integer number, String neighborhood, Double valueRegistration, Long cityId, String userId, Long ownerId) {
+    public ImovelRequest(String nomeImovel, String street, Integer number, String neighborhood, Double valueRegistration, Long cityId, String userId, Long ownerId, Integer cep, LocalDate dateValue) {
         this.nomeImovel = nomeImovel;
         this.street = street;
         this.number = number;
         this.neighborhood = neighborhood;
         this.valueRegistration = valueRegistration;
-        if(valueRegistration != null) {
-            this.dateValue = LocalDate.now();
-
-        }
+        this.dateValue = dateValue;
         this.cityId = cityId;
         this.userId = userId;
         this.ownerId = ownerId;
+        this.cep = cep;
 
     }
 
@@ -40,7 +42,7 @@ public class ImovelRequest {
         UserEntity user = repositoryUser.findById(userId).orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
         OwnerEntity owner = repositoryOwner.findById(ownerId).orElseThrow(() -> new RuntimeException("Proprietário não encontrado!"));
         CityEntity city = repositoryCity.findById(cityId).orElseThrow(() -> new RuntimeException("Cidade não encontrada!"));
-        AddressEntity address = new AddressEntity(street,number, neighborhood, city);
+        AddressEntity address = new AddressEntity(street,number, neighborhood, city, cep);
         repositoryAddress.save(address);
         return new ImovelEntity(nomeImovel, valueRegistration, dateValue, address ,user, owner);
     }

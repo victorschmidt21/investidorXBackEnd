@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface RepositoryOwner extends JpaRepository<OwnerEntity, Long> {
-//    @Query("SELECT i FROM OwnerEntity i WHERE i.user.id = :userid AND  i.ativo = :true")
-//    List<OwnerEntity> findByAtivoTrue(@Param("userId") String userId);
+    @Query("SELECT i FROM OwnerEntity i WHERE i.user.id = :userId AND  i.ativo = true")
+    List<OwnerEntity> findByAtivoTrue(@Param("userId") String userId);
 }

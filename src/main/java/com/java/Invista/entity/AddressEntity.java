@@ -13,17 +13,19 @@ public class AddressEntity {
     private String street;
     private Integer number;
     private String neighborhood;
+    private Integer cep;
 
     @ManyToOne
     CityEntity city;
 
     public AddressEntity() {}
 
-    public AddressEntity(String street, Integer number, String neighborhood, CityEntity city) {
+    public AddressEntity(String street, Integer number, String neighborhood, CityEntity city, Integer cep) {
         this.street = street;
         this.number = number;
         this.neighborhood = neighborhood;
         this.city = city;
+        this.cep = cep;
     }
 
 
@@ -62,5 +64,17 @@ public class AddressEntity {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getCep() {
+        return cep;
+    }
+
+    public void setCep(Integer cep) {
+        this.cep = cep;
     }
 }

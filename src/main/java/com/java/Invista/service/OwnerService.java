@@ -4,6 +4,7 @@ import com.java.Invista.dto.request.OwnerRequest;
 import com.java.Invista.entity.AddressEntity;
 import com.java.Invista.entity.CityEntity;
 import com.java.Invista.entity.OwnerEntity;
+import com.java.Invista.entity.UserEntity;
 import com.java.Invista.repository.RepositoryAddress;
 import com.java.Invista.repository.RepositoryCity;
 import com.java.Invista.repository.RepositoryOwner;
@@ -59,7 +60,7 @@ public class OwnerService {
         if (ownerOptional.isEmpty()) {
             throw new RuntimeException("Proprietário não encontrado!");
         }
-        if(ownerRequest.getStreet() != null || ownerRequest.getNeighborhood() != null || ownerRequest.getNumber() != null || ownerRequest.getCityId() != null) {
+        if(ownerRequest.getStreet() != null || ownerRequest.getNeighborhood() != null || ownerRequest.getNumber() != null || ownerRequest.getCityId() != null || ownerRequest.getCep() != null) {
             AddressEntity address = ownerOptional.get().getAddress();
             if(ownerRequest.getCityId() != null) {
                 CityEntity city = repositoryCity.findById(ownerRequest.getCityId()).orElseThrow(() -> new RuntimeException("Cidade não encontrada!"));
@@ -73,6 +74,9 @@ public class OwnerService {
             }
             if(ownerRequest.getNumber() != null){
                 address.setNumber(ownerRequest.getNumber());
+            }
+            if(ownerRequest.getCep() != null) {
+                address.setCep(ownerRequest.getCep());
             }
             addressService.update(address.getId(), address);
         }
@@ -88,9 +92,18 @@ public class OwnerService {
         if(ownerRequest.getCpf_cnpj() != null) {
             ownerOptional.get().setCpf_cnpj(ownerRequest.getCpf_cnpj());
         }
+        if (ownerRequest.getUserId() != null){
+            UserEntity user = repositoryUser.findById(ownerRequest.getUserId()).orElseThrow(()->
+                    new RuntimeException("Usuário não encontrado"));
+            ownerOptional.get().setUser(user);
+        }
         OwnerEntity ownerUpdate = ownerOptional.get();
         repositoryOwner.save(ownerUpdate);
         return ownerUpdate;
+    }
+
+    public List<OwnerEntity> getByUserId(String userId) {
+        return repositoryOwner.findByAtivoTrue(userId);
     }
 
 }

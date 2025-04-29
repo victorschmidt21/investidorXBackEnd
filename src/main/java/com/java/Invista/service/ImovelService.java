@@ -67,7 +67,7 @@ public class ImovelService {
             imovelOptional.get().setValueRegistration(imovel.getValueRegistration());
             imovelOptional.get().setDate_Value(LocalDate.now());
         }
-        if(imovel.getStreet() != null || imovel.getNeighborhood() != null || imovel.getNumber() != null || imovel.getCityId() != null) {
+        if(imovel.getStreet() != null || imovel.getNeighborhood() != null || imovel.getNumber() != null || imovel.getCityId() != null || imovel.getCep() != null) {
             AddressEntity address = imovelOptional.get().getAdress();
             if(imovel.getCityId() != null) {
                 CityEntity city = cityService.getById(imovel.getCityId()).orElseThrow(() -> new RuntimeException("Cidade não encontrada"));
@@ -81,6 +81,9 @@ public class ImovelService {
             }
             if(imovel.getNumber() != null){
                 address.setNumber(imovel.getNumber());
+            }
+            if (imovel.getCep() != null){
+                address.setCep(imovel.getCep());
             }
             addressService.update(address.getId(), address);
         }
