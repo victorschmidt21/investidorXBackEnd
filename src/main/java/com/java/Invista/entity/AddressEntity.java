@@ -2,8 +2,6 @@ package com.java.Invista.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Optional;
-
 @Entity
 @Table(name = "address")
 public class AddressEntity {

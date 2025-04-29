@@ -4,6 +4,7 @@ import com.java.Invista.repository.RepositoryAddress;
 import com.java.Invista.repository.RepositoryCity;
 import com.java.Invista.repository.RepositoryOwner;
 import com.java.Invista.repository.RepositoryUser;
+
 import java.time.LocalDate;
 
 public class ImovelRequest {
@@ -14,14 +15,9 @@ public class ImovelRequest {
     private Double valueRegistration;
     private LocalDate dateValue;
     private Long cityId;
+    private Integer cep;
     private String userId;
     private Long ownerId;
-    private Integer cep;
-
-
-    public Integer getCep() {
-        return cep;
-    }
 
     public ImovelRequest(String nomeImovel, String street, Integer number, String neighborhood, Double valueRegistration, Long cityId, String userId, Long ownerId, Integer cep, LocalDate dateValue) {
         this.nomeImovel = nomeImovel;
@@ -37,7 +33,6 @@ public class ImovelRequest {
 
     }
 
-
     public ImovelEntity toModel(RepositoryUser repositoryUser, RepositoryCity repositoryCity, RepositoryOwner repositoryOwner, RepositoryAddress repositoryAddress){
         UserEntity user = repositoryUser.findById(userId).orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
         OwnerEntity owner = repositoryOwner.findById(ownerId).orElseThrow(() -> new RuntimeException("Proprietário não encontrado!"));
@@ -51,26 +46,80 @@ public class ImovelRequest {
         return nomeImovel;
     }
 
+    public void setNomeImovel(String nomeImovel) {
+        this.nomeImovel = nomeImovel;
+    }
+
     public String getStreet() {
         return street;
     }
 
-
-    public Integer getNumber() {
-        return number;
+    public void setStreet(String street) {
+        this.street = street;
     }
-
-
-    public Double getValueRegistration() {
-        return valueRegistration;
-    }
-
 
     public String getNeighborhood() {
         return neighborhood;
     }
 
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public Double getValueRegistration() {
+        return valueRegistration;
+    }
+
+    public void setValueRegistration(Double valueRegistration) {
+        this.valueRegistration = valueRegistration;
+    }
+
+    public LocalDate getDateValue() {
+        return dateValue;
+    }
+
+    public void setDateValue(LocalDate dateValue) {
+        this.dateValue = dateValue;
+    }
+
     public Long getCityId() {
         return cityId;
     }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
+    }
+
+    public Integer getCep() {
+        return cep;
+    }
+
+    public void setCep(Integer cep) {
+        this.cep = cep;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
+    }
+
 }
