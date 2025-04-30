@@ -2,6 +2,7 @@ package com.java.Invista.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -13,12 +14,12 @@ public class RenevueEntity {
         private String title;
         private String description;
         private double value;
-        private Date date;
+        private LocalDate date;
 
         @ManyToOne
         ImovelEntity imovel;
 
-        public RenevueEntity(String title, String description, double value, Date date, ImovelEntity imovel) {
+        public RenevueEntity(String title, String description, double value, LocalDate date, ImovelEntity imovel) {
             this.title = title;
             this.description = description;
             this.value = value;
@@ -61,11 +62,11 @@ public class RenevueEntity {
             this.value = value;
         }
 
-        public Date getDate() {
+        public LocalDate getDate() {
             return date;
         }
 
-        public void setDate(Date date) {
+        public void setDate(LocalDate date) {
             this.date = date;
         }
 
