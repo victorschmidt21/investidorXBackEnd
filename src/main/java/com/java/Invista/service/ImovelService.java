@@ -36,10 +36,9 @@ public class ImovelService {
         this.repositoryImovel = repositoryImovel;
     }
 
-    public String create(ImovelRequest imovelRequest) {
+    public ImovelEntity create(ImovelRequest imovelRequest) {
         ImovelEntity imovel = imovelRequest.toModel(repositoryUser,repositoryCity, repositoryOwner, repositoryAddress);
-        repositoryImovel.save(imovel);
-        return "Cadastrado com sucesso!";
+        return repositoryImovel.save(imovel);
     }
 
     public List<ImovelEntity> list() {

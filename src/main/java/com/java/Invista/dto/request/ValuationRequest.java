@@ -1,35 +1,30 @@
-package com.java.Invista.entity;
+package com.java.Invista.dto.request;
 
-import jakarta.persistence.*;
-
+import com.java.Invista.entity.ImovelEntity;
+import com.java.Invista.entity.ValuationEntity;
+import com.java.Invista.repository.RepositoryImovel;
 import java.time.LocalDate;
-import java.util.Date;
 
-@Entity
-@Table(name = "valuation")
-public class ValuationEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ValuationRequest {
     private String nameResponsible;
     private LocalDate date;
     private String description;
     private String rotaImage;
     private double value;
+    private Long imovelId;
 
-    @ManyToOne
-    ImovelEntity imovel;
-
-    public ValuationEntity() {
+    public ValuationRequest(String nameResponsible, LocalDate date, String description, String rotaImage, double value, Long imovelId) {
+        this.nameResponsible = nameResponsible;
+        this.date = date;
+        this.description = description;
+        this.rotaImage = rotaImage;
+        this.value = value;
+        this.imovelId = imovelId;
     }
 
-    public ValuationEntity(String nameResponsible, String description, LocalDate date, String rotaImage, ImovelEntity imovel, double value) {
-        this.nameResponsible = nameResponsible;
-        this.description = description;
-        this.date = date;
-        this.rotaImage = rotaImage;
-        this.imovel = imovel;
-        this.value = value;
+    public ValuationEntity toModel(RepositoryImovel repositoryImovel) {
+        ImovelEntity imovel = repositoryImovel.findById(imovelId).orElseThrow(() -> new RuntimeException("Imovel não encontrado!"));
+        return new ValuationEntity(nameResponsible, description, date, rotaImage, imovel, value);
     }
 
     public String getNameResponsible() {
@@ -38,14 +33,6 @@ public class ValuationEntity {
 
     public void setNameResponsible(String nameResponsible) {
         this.nameResponsible = nameResponsible;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public LocalDate getDate() {
@@ -72,19 +59,19 @@ public class ValuationEntity {
         this.rotaImage = rotaImage;
     }
 
-    public ImovelEntity getImovel() {
-        return imovel;
-    }
-
-    public void setImovel(ImovelEntity imovel) {
-        this.imovel = imovel;
-    }
-
     public double getValue() {
         return value;
     }
 
     public void setValue(double value) {
         this.value = value;
+    }
+
+    public Long getImovelId() {
+        return imovelId;
+    }
+
+    public void setImovelId(Long imovelId) {
+        this.imovelId = imovelId;
     }
 }

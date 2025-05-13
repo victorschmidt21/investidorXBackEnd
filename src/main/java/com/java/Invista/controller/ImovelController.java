@@ -22,9 +22,10 @@ public class ImovelController {
     }
 
     @PostMapping
-    String create(@RequestBody ImovelRequest imovel) {
+    ImovelEntity create(@RequestBody ImovelRequest imovel) {
         return imovelService.create(imovel);
     }
+
     @PutMapping("/{id}")
     ImovelEntity update(@PathVariable("id")Long id, @RequestBody ImovelRequest imovel) {
         return imovelService.update(id, imovel);
@@ -37,11 +38,12 @@ public class ImovelController {
     List<String> listNomes() {
         return imovelService.listImoveis();
     }
+
     @GetMapping("/{id}")
     List<ImovelEntity> getByUser(@PathVariable String id) {
         return repositoryImovel.findByUser(id);
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     String delete(@PathVariable("id") Long id) {
         return imovelService.delete(id);
     }

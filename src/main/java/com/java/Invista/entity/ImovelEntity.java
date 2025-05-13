@@ -14,6 +14,7 @@ public class ImovelEntity {
     private String nome_imovel;
     private Number valueRegistration;
     private LocalDate date_Value;
+    private Boolean ativo = true;
     @ManyToOne
     AddressEntity adress;
 
