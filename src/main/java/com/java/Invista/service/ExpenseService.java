@@ -56,4 +56,17 @@ public class ExpenseService {
         return repositoryExpense.save(expense);
     }
 
+    public List<ExpenseEntity> createMany(List<ExpenseRequest> expenseRequests) {
+        List<ExpenseEntity> expenses = expenseRequests.stream()
+                .map(request -> request.toModel(repositoryImovel))
+                .toList();
+
+        return repositoryExpense.saveAll(expenses);
+    }
+
+    public ExpenseEntity createOne(ExpenseRequest expenseRequest) {
+        ExpenseEntity expense = expenseRequest.toModel(repositoryImovel);
+        return repositoryExpense.save(expense);
+    }
+
 }
