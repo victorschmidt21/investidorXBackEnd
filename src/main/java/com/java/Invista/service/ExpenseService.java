@@ -69,4 +69,26 @@ public class ExpenseService {
         return repositoryExpense.save(expense);
     }
 
+    public Map<String, Object> getResumoDespesasPorImovel(Long imovelId) {
+        var imovel = repositoryImovel.findById(imovelId)
+                .orElseThrow(() -> new RuntimeException("Imóvel não encontrado"));
+
+        List<ExpenseEntity> despesas = repositoryExpense.findByImovelId(imovelId);
+
+        List<Map<String, Object>> listaDespesas = despesas.stream().map(despesa -> {
+            Map<String, Object> dados = new HashMap<>();
+            dados.put("título", despesa.getTitle());
+            dados.put("valor", despesa.getValue());
+            dados.put("data", despesa.getDate());
+            return dados;
+        }).toList();
+
+        Map<String, Object> resposta = new HashMap<>();
+        resposta.put("nomeImovel", imovel.getNome_imovel());
+        resposta.put("despesas", listaDespesas);
+
+        return resposta;
+    }
+
+
 }

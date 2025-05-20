@@ -100,8 +100,9 @@ public class ImovelService {
         return "Imovel removido com sucesso!";
     }
 
-
-
-
+    public ImovelEntity buscarImovelPorId(Long id) {
+        return repositoryImovel.findById(id)
+                .orElseThrow(() -> new RuntimeException("Imóvel não encontrado com o ID: " + id));
+    }
 
 }
