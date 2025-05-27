@@ -12,7 +12,7 @@ public class ImovelEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_imovel;
     private String nome_imovel;
-    private Number valueRegistration;
+    private Double valueRegistration;
     private LocalDate date_Value;
     private Boolean ativo = true;
     @ManyToOne
@@ -30,7 +30,7 @@ public class ImovelEntity {
 
     public ImovelEntity(String nome_imovel, Number valueRegistration, LocalDate date_Value, AddressEntity adress, UserEntity user, OwnerEntity owner) {
         this.nome_imovel = nome_imovel;
-        this.valueRegistration = valueRegistration;
+        this.valueRegistration = (Double) valueRegistration;
         this.date_Value = date_Value;
         this.adress = adress;
         this.user = user;
@@ -50,7 +50,7 @@ public class ImovelEntity {
     }
 
     public void setValueRegistration(Number valueRegistration) {
-        this.valueRegistration = valueRegistration;
+        this.valueRegistration = (Double) valueRegistration;
     }
 
     public LocalDate getDate_Value() {

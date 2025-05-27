@@ -25,17 +25,9 @@ public class RenevueService {
         return repositoryRenevue.save(renevue);
     }
 
-    public Map<String, Object> getValueTotal(Long id) {
-        Double value = 0.0;
-        Map<String, Object> map = new HashMap<>();
-        List<RenevueEntity> expenses = repositoryRenevue.findByImovelId(id);
-        for(RenevueEntity expense: expenses){
-            value = value + expense.getValue();
-        }
-        map.put("Número de receitas", expenses.size());
-        map.put("Ticket Médio", value/expenses.size());
-        map.put("valueTotal", value);
-        return map;
+    public Double getValueTotal() {
+        Double total = repositoryRenevue.sumTotalValue();
+        return total != null ? total : 0.0;  // evita null
     }
 
     public  String deleteById(Long id){

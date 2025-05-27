@@ -11,4 +11,7 @@ import java.util.List;
 public interface RepositoryRenevue extends JpaRepository<RenevueEntity, Long> {
     @Query("SELECT i FROM RenevueEntity i WHERE i.imovel.id_imovel = :imovelId ")
     List<RenevueEntity> findByImovelId(@Param("imovelId") Long imovelId);
+
+    @Query("SELECT SUM(r.value) FROM RenevueEntity r")
+    Double sumTotalValue();
 }

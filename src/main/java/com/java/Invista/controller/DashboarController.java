@@ -3,6 +3,7 @@ package com.java.Invista.controller;
 import com.java.Invista.entity.ImovelEntity;
 import com.java.Invista.service.ExpenseService;
 import com.java.Invista.service.ImovelService;
+import com.java.Invista.service.RenevueService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -19,14 +20,20 @@ public class DashboarController {
         this.expenseService = expenseService;
     }
 
-    @GetMapping("/imovel/{id}")
-    public ImovelEntity getByIdImovel(@PathVariable long id){
-        return imovelService.buscarImovelPorId(id);
-    }
-
-    @GetMapping("/imovel/{id}/resumo")
+    @GetMapping("/imovel/{id}/resumo-despesa")
     public Map<String, Object> getResumoImovel(@PathVariable Long id) {
         return expenseService.getResumoDespesasPorImovel(id);
     }
+
+    @GetMapping("/imovel/quantidade")
+    public Long getQuantidadeImoveis() {
+        return imovelService.contarImoveis();
+    }
+
+    @GetMapping("/valor-total")
+    public Double getValorTotalImoveis() {
+        return imovelService.calcularValorTotalImoveis();
+    }
+
 }
 

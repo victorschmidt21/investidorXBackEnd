@@ -10,4 +10,7 @@ import java.util.List;
 public interface RepositoryImovel extends JpaRepository<ImovelEntity, Long> {
     @Query("SELECT i FROM ImovelEntity i WHERE i.user.id = :userid")
     List<ImovelEntity> findByUser(@Param("userid") String user);
+
+    @Query("SELECT SUM(i.valueRegistration) FROM ImovelEntity i WHERE i.ativo = true")
+    Number somarValoresTotaisImoveisAtivos();
 }

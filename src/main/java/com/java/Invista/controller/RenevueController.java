@@ -22,9 +22,9 @@ public class RenevueController {
         return renevueService.create(request);
     }
 
-    @GetMapping("/imovel/{id}")
-    Map<String, Object> getByIdImovel(@PathVariable long id){
-        return renevueService.getValueTotal(id);
+    @GetMapping("/imovel/total")
+    public Double getValorTotal() {
+        return renevueService.getValueTotal();
     }
 
     @DeleteMapping("{id}")

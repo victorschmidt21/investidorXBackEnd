@@ -105,4 +105,15 @@ public class ImovelService {
                 .orElseThrow(() -> new RuntimeException("Imóvel não encontrado com o ID: " + id));
     }
 
+    public Long contarImoveis() {
+        return repositoryImovel.count();
+    }
+
+    public Double calcularValorTotalImoveis() {
+        Double total = (Double) repositoryImovel.somarValoresTotaisImoveisAtivos();
+        return total != null ? total : 0.0;
+    }
+
+
+
 }
