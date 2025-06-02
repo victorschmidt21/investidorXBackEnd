@@ -6,6 +6,7 @@ import com.java.Invista.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -33,5 +34,9 @@ public class ExpenseController {
     @PutMapping("{id}")
     ExpenseEntity update(@PathVariable Long id, @RequestBody ExpenseRequest expense){
         return expenseService.update(id, expense);
+    }
+    @PostMapping("/popular")
+    public List<ExpenseEntity> popularDespesas(@RequestBody List<ExpenseRequest> expenseRequests) {
+        return expenseService.createMany(expenseRequests);
     }
 }
