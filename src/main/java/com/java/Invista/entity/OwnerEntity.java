@@ -9,7 +9,7 @@ public class OwnerEntity {
     private Long id;
     private String name;
     private String cpf_cnpj;
-    private Number phone;
+    private String phone;
     private String email;
     private Boolean ativo = true;
 
@@ -21,7 +21,7 @@ public class OwnerEntity {
 
     public OwnerEntity() {}
 
-    public OwnerEntity(String name, String cpf_cnpj, Number phone, String email, AddressEntity address, UserEntity user) {
+    public OwnerEntity(String name, String cpf_cnpj, String phone, String email, AddressEntity address, UserEntity user) {
         this.name = name;
         this.cpf_cnpj = cpf_cnpj;
         this.phone = phone;
@@ -54,11 +54,11 @@ public class OwnerEntity {
         this.cpf_cnpj = cpf_cnpj;
     }
 
-    public Number getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Number phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

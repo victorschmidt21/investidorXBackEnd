@@ -40,7 +40,7 @@ public class OwnerRequest {
         CityEntity city = repositoryCity.findById(cityId).orElseThrow(() -> new RuntimeException("Cidade não encontrada!"));
         AddressEntity address = new AddressEntity(street, number, neighborhood, city, cep);
         repositoryAddress.save(address);
-        return new OwnerEntity(name, cpf_cnpj, phone, email, address, user);
+        return new OwnerEntity(name, cpf_cnpj, phone.toString(), email, address, user);
     }
 
     public String getName() {
@@ -59,8 +59,8 @@ public class OwnerRequest {
         this.cpf_cnpj = cpf_cnpj;
     }
 
-    public Number getPhone() {
-        return phone;
+    public String getPhone() {
+        return phone.toString();
     }
 
     public void setPhone(Number phone) {

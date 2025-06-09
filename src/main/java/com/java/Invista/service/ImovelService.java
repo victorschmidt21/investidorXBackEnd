@@ -91,12 +91,30 @@ public class ImovelService {
     }
 
     public String delete(Long id) {
-        Optional<ImovelEntity> imovel = repositoryImovel.findById(id);
-        if(imovel.isEmpty()) {
-            throw new RuntimeException("Erro: ID inexistente!");
+        Optional<ImovelEntity> imovelOptional = repositoryImovel.findById(id);
+        if (imovelOptional.isEmpty()) {
+            throw new RuntimeException("Erro: ID do imóvel não encontrado!");
         }
+
+        ImovelEntity imovel = imovelOptional.get();
+        AddressEntity address = imovel.getAdress(); // Pega o endereço antes de deletar o imóvel
+
+        // Deleta o imóvel primeiro
         repositoryImovel.deleteById(id);
-        addressService.delete(imovel.get().getAdress().getId());
+
+        if (address != null) {
+            // Verifica se o endereço ainda é referenciado por algum Owner ativo
+            boolean addressInUseByOwner = repositoryOwner.existsByAddressId(address.getId());
+
+            if (!addressInUseByOwner) {
+                // Se não estiver em uso por nenhum owner, pode deletar o endereço
+                addressService.delete(address.getId());
+            } else {
+                // Opcional: Logar ou tratar o caso de o endereço não ser deletado
+                System.out.println("Endereço com ID " + address.getId() + " ainda está em uso por um proprietário e não foi deletado.");
+            }
+        }
+
         return "Imovel removido com sucesso!";
     }
 

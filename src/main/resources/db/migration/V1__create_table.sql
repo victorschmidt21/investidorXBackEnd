@@ -1,7 +1,9 @@
 CREATE TABLE `user` (
                         `id` varchar(255) NOT NULL,
                         `username` varchar(255) DEFAULT NULL,
-                        PRIMARY KEY (`id`)
+                        PRIMARY KEY
+
+                            (`id`)
 );
 
 CREATE TABLE `states` (
@@ -31,13 +33,14 @@ CREATE TABLE `address` (
                            CONSTRAINT `FKpo044ng5x4gynb291cv24vtea` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`)
 );
 
+-- No arquivo V1__create_table.sql
 CREATE TABLE `owner` (
                          `id` bigint NOT NULL AUTO_INCREMENT,
                          `ativo` bit(1) DEFAULT NULL,
                          `cpf_cnpj` varchar(255) DEFAULT NULL,
                          `email` varchar(255) DEFAULT NULL,
                          `name` varchar(255) DEFAULT NULL,
-                         `phone` varbinary(255) DEFAULT NULL,
+                         `phone` varchar(30) DEFAULT NULL, -- Alterado de varbinary(255) para varchar(30)
                          `address_id` bigint DEFAULT NULL,
                          `user_id` varchar(255) DEFAULT NULL,
                          PRIMARY KEY (`id`),

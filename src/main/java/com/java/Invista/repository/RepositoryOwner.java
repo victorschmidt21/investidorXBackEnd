@@ -9,4 +9,6 @@ import org.springframework.data.repository.query.Param;
 public interface RepositoryOwner extends JpaRepository<OwnerEntity, Long> {
     @Query("SELECT i FROM OwnerEntity i WHERE i.user.id = :userId AND  i.ativo = true")
     List<OwnerEntity> findByAtivoTrue(@Param("userId") String userId);
+
+    boolean existsByAddressId(Long addressId);
 }
