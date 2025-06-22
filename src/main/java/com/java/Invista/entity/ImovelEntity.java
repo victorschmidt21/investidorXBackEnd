@@ -92,5 +92,9 @@ public class ImovelEntity {
     public void setId_imovel(Long id_imovel) {
         this.id_imovel = id_imovel;
     }
+
+    public void setAtivo(boolean b) {
+
+    }
 }
 

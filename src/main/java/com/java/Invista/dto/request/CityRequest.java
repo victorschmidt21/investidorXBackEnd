@@ -13,10 +13,28 @@ public class CityRequest {
         this.name = name;
     }
 
+    public CityRequest() {
+    }
+
     public CityEntity toModel(RepositoryState repositoryState) {
         StateEntity state = repositoryState.findById(stateId)
                 .orElseThrow(() -> new RuntimeException("Estado não encontrado!"));
         return new CityEntity(name, state);
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStateId(Long stateId) {
+        this.stateId = stateId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Long getStateId() {
+        return stateId;
+    }
 }

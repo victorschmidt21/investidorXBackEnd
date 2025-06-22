@@ -22,6 +22,10 @@ public class ValuationRequest {
         this.imovelId = imovelId;
     }
 
+    public ValuationRequest() {
+
+    }
+
     public ValuationEntity toModel(RepositoryImovel repositoryImovel) {
         ImovelEntity imovel = repositoryImovel.findById(imovelId).orElseThrow(() -> new RuntimeException("Imovel não encontrado!"));
         return new ValuationEntity(nameResponsible, description, date, rotaImage, imovel, value);
