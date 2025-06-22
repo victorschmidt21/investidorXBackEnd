@@ -14,6 +14,10 @@ public class RenevueRequest {
     private LocalDate date;
     private Long imovelId;
 
+    public RenevueRequest() {
+
+    }
+
     public String getTitle() {
         return title;
     }

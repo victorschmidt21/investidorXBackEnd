@@ -33,6 +33,10 @@ public class ImovelRequest {
 
     }
 
+    public ImovelRequest() {
+
+    }
+
     public ImovelEntity toModel(RepositoryUser repositoryUser, RepositoryCity repositoryCity, RepositoryOwner repositoryOwner, RepositoryAddress repositoryAddress){
         UserEntity user = repositoryUser.findById(userId).orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
         OwnerEntity owner = repositoryOwner.findById(ownerId).orElseThrow(() -> new RuntimeException("Proprietário não encontrado!"));

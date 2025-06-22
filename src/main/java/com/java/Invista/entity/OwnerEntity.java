@@ -93,4 +93,5 @@ public class OwnerEntity {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

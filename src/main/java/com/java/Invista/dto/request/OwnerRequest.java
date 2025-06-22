@@ -13,7 +13,7 @@ public class OwnerRequest {
 
     private String name;
     private String cpf_cnpj;
-    private Number phone;
+    private String phone;
     private String email;
     private Long cityId;
     private String street;
@@ -22,7 +22,7 @@ public class OwnerRequest {
     private String userId;
     private Integer cep;
 
-    public OwnerRequest(String name, String cpf_cnpj, Number phone, String email, Long cityid, String street, Integer number, String neighborhood, String userId, Integer cep) {
+    public OwnerRequest(String name, String cpf_cnpj, String phone, String email, Long cityid, String street, Integer number, String neighborhood, String userId, Integer cep) {
         this.name = name;
         this.cpf_cnpj = cpf_cnpj;
         this.phone = phone;
@@ -33,6 +33,10 @@ public class OwnerRequest {
         this.neighborhood = neighborhood;
         this.userId = userId;
         this.cep = cep;
+    }
+
+    public OwnerRequest() {
+
     }
 
     public OwnerEntity toModel(RepositoryAddress repositoryAddress, RepositoryCity repositoryCity, RepositoryUser repositoryUser){
@@ -63,7 +67,7 @@ public class OwnerRequest {
         return phone.toString();
     }
 
-    public void setPhone(Number phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
